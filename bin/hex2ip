@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: hex2ip IP\n" \
+    "  Converts an IPv4 from hexadecimal to dotted representation"
+end
+
+optparse.parse!
+
+raise 'Hexadecimal IP expected' if ARGV.empty?
+raise 'Invalid IP' unless ARGV[0] =~ /^[0-9a-fA-F]+$/
+
+n = ARGV[0].hex
+raise 'Impossibly high IP' unless (0..1<<32).include? n
+
+d = n % 256
+c = (n >> 8) % 256
+b = (n >> 16) % 256
+a = (n >> 24) % 256
+puts "#{a}.#{b}.#{c}.#{d}"

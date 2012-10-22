@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'cgi'
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: urldecode [string]\n" \
+    "  URL-decodes the provided string (or standard input)"
+end
+
+optparse.parse!
+
+if ARGV.empty?
+  str = STDIN.read
+else
+  str = ARGV.join ' '
+end
+
+puts CGI::unescape str

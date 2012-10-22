@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+format = '%X'
+
+optparse = OptionParser.new do |opts|
+	opts.banner = "Usage: ip2hex [-l] IP\n" \
+    "  Converts an IPv4 from dotted to hexadecimal representation"
+  opts.on '-l', '--lowercase', 'Use lowercase digits' do
+    format = '%x'
+  end
+end
+
+optparse.parse!
+raise 'IP expected' if ARGV.empty?
+
+parts = ARGV[0].split('.').collect{|n| n.to_i}
+raise 'IP does not have 4 integers' unless parts.length == 4
+
+ACCEPTED = 0..255
+parts.each {|p| raise 'Integer not in 0..255' unless ACCEPTED.include? p}
+
+num = parts.reverse.inject(0){|r,e| (r<<8)+e}
+printf "#{format}\n", num

@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'shellwords'
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: shellescape [string]\n" \
+    "  Escapes the provided string (or standard input) for unquoted Bourne shell usage"
+end
+
+optparse.parse!
+
+if ARGV.empty?
+  str = STDIN.read
+else
+  str = ARGV.join ' '
+end
+
+puts Shellwords::escape str
