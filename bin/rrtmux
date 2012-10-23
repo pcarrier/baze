@@ -7,10 +7,16 @@ def help
   puts '  Connects to a hostname using ssh and reattach or create a tmux session'
 end
 
+timeout = 0.125
+
 if ARGV.empty? or ARGV.find {|arg| arg == '-h' or arg == '--help'}
   help
 else
-  while $?.nil? or $?.exitstatus == 255
+  while true
     system 'ssh', '-t', *ARGV, 'tmux att || tmux new'
+    exit if $?.exitstatus == 0
+    sleep timeout
+    STDERR.puts "ssh failed, waiting for #{timeout} secs..."
+    timeout *= 2 if timeout < 4
   end
 end
