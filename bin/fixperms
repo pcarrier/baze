@@ -13,7 +13,7 @@ end
 optparse.parse!
 
 if ARGV.empty?
-  specpaths = Dir.glob '/etc/fixperms.d/*'
+  specpaths = Dir.glob '/etc/fixperms.d/**/*'
 else
   specpaths = ARGV
 end
