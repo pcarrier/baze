@@ -23,6 +23,7 @@ specpaths.each do |specpath|
 
   spec.each do |glob, infos|
     files = Dir.glob glob
+    next if files.empty?
 
     user, group, mod = infos['user'], infos['group'], infos['mod']
 
@@ -31,9 +32,7 @@ specpaths.each do |specpath|
 
     puts "#{files.join ', '} -> #{descr}"
 
-    next if files.empty?
-
-    FileUtils.chown user, group, files
+    FileUtils.chown user, group, files unless user.nil? and group.nil?
     FileUtils.chmod mod, files if mod
   end
 end
