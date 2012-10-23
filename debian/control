@@ -5,11 +5,11 @@ Maintainer: Pierre Carrier <pierre@spotify.com>
 Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.2.7~)
 Standards-Version: 3.9.2
 Homepage: https://github.com/pcarrier/baze
-XS-Ruby-Versions: all
+XS-Ruby-Versions: ruby1.9.1
 
 Package: ruby-baze
 Architecture: all
-XB-Ruby-Versions: ${ruby:Versions}
-Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter
+XB-Ruby-Versions: ruby1.9.1
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby1.9.1
 Description: A set of base utilities for POSIX system
  Minimalistic utilities written in Ruby for POSIX systems.
