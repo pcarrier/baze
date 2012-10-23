@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+require 'optparse'
+
+reverse = false
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: hosthost host\n" \
+  	"  Resolves names"
+
+  opts.on '-r', '--reverse', 'Display reverse lookups' do
+    reverse = true
+  end
+end
+
+optparse.parse!
+
+raise 'host expected' if ARGV.empty?
+
+infos = Socket.getaddrinfo(ARGV[0], 0, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, 0, reverse)
+
+if reverse
+  infos.each {|r| puts r[2]}
+else
+  infos.each {|r| puts r[3]}
+end
