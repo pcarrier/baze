@@ -18,7 +18,7 @@ optparse.parse!
 
 raise 'host expected' if ARGV.empty?
 
-infos = Socket.getaddrinfo(ARGV[0], 0, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, 0, reverse)
+infos = Socket.getaddrinfo(ARGV[0], nil, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, 0, reverse)
 
 if reverse
   infos.each {|r| puts r[2]}
