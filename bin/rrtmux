@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+def help
+  puts 'Usage: rrtmux [ssh options] hostname'
+  puts '  Connects to a hostname using ssh and reattach or create a tmux session'
+end
+
+if ARGV.empty? or ARGV.find {|arg| arg == '-h' or arg == '--help'}
+  help
+else
+  while $?.nil? or $?.exitstatus == 255
+    system 'ssh', '-t', *ARGV, 'tmux att || tmux new'
+  end
+end
