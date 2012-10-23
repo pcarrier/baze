@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'fileutils'
+require 'yaml'
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: fixperms [config file ...]\n" \
+    "  Apply files permissions and ownership rules using YAML specifications"
+  opts.on '-l', '--lowercase', 'Use lowercase digits' do
+    format = '%x'
+  end
+end
+
+optparse.parse!
+
+if ARGV.empty?
+  specpaths = Dir.glob '/etc/fixperms.d/*'
+else
+  specpaths = ARGV
+end
+
+specpaths.each do |specpath|
+  spec = YAML::load File::read specpath
+
+  spec.each do |glob, infos|
+    files = Dir.glob glob
+
+    user, group, mod = infos['user'], infos['group'], infos['mod']
+
+    user_grp = "#{user}:#{group}" if user or group
+    descr = [user_grp, mod].compact.join ', '
+
+    puts "#{files.join ', '} -> #{descr}"
+
+    next if files.empty?
+
+    FileUtils.chown user, group, files
+    FileUtils.chmod mod, files if mod
+  end
+end
