@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Pierre Carrier']
   s.email       = ['pierre@spotify.com']
   s.homepage    = "https://github.com/pcarrier/baze"
-  s.summary     = 'Base utilities for your system'
+  s.summary     = 'Base utilities for POSIX system'
   s.license     = 'ISC'
 
   s.required_rubygems_version = '>= 1.2.0'
