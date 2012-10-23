@@ -8,7 +8,7 @@ optparse = OptionParser.new do |opts|
   opts.banner = "Usage: randmac [-l]\n" \
     "  Generates a completely random MAC address"
 
-	opts.on '-l', '--lowercase', 'Use lowercase digits' do
+  opts.on '-l', '--lowercase', 'Use lowercase digits' do
     format = '%02x:%02x:%02x:%02x:%02x:%02x'
   end
 end
