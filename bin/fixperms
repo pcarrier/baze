@@ -7,7 +7,6 @@ require 'yaml'
 optparse = OptionParser.new do |opts|
   opts.banner = "Usage: fixperms [config file ...]\n" \
     "  Apply files permissions and ownership rules using YAML specifications"
-  end
 end
 
 optparse.parse!
