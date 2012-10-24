@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+require 'optparse'
+
+reverse = false
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: suc [-r] [file]\n" \
+    "  Scale-friendlier equivalent of sort | uniq -c | sort -n"
+  opts.on '-r', '--reverse', 'Sort from most to least frequent' do
+    reverse = true
+  end
+end
+
+optparse.parse!
+
+if ARGV.empty?
+  io = STDIN
+else
+  io = File.open ARGV[0]
+end
+
+counts = Hash.new 0
+
+io.each_line do |line|
+  counts[line] += 1
+end
+
+if reverse
+  sorted = counts.sort_by {|k,v| -v}
+else
+  sorted = counts.sort_by {|k,v| v}
+end
+
+sorted.each do |line, count|
+  printf "%7i %s", count, line
+end
