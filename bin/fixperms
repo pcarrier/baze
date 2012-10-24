@@ -12,7 +12,7 @@ end
 optparse.parse!
 
 if ARGV.empty?
-  specpaths = Dir.glob '/etc/fixperms.d/**/*'
+  specpaths = Dir.glob('/etc/fixperms.d/**/*').reject {|f| FileTest.directory? f}
 else
   specpaths = ARGV
 end
