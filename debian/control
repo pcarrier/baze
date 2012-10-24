@@ -1,4 +1,4 @@
-Source: ruby-baze
+Source: baze
 Section: ruby
 Priority: optional
 Maintainer: Pierre Carrier <pierre@spotify.com>
@@ -7,7 +7,7 @@ Standards-Version: 3.9.2
 Homepage: https://github.com/pcarrier/baze
 XS-Ruby-Versions: ruby1.9.1
 
-Package: ruby-baze
+Package: baze
 Architecture: all
 XB-Ruby-Versions: ruby1.9.1
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby1.9.1
