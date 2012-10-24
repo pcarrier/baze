@@ -1,3 +1,9 @@
+ruby-baze (0.0.2) UNRELEASED; urgency=low
+
+  * New release
+
+ -- Pierre Carrier <pierre@debian>  Tue, 23 Oct 2012 21:29:49 +0000
+
 ruby-baze (0.0.1-1) UNRELEASED; urgency=low
 
   * Initial release
