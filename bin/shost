@@ -6,7 +6,7 @@ require 'optparse'
 reverse = false
 
 optparse = OptionParser.new do |opts|
-  opts.banner = "Usage: hosthost host\n" \
+  opts.banner = "Usage: shost [-r] host\n" \
   	"  Resolves names"
 
   opts.on '-r', '--reverse', 'Display reverse lookups' do
