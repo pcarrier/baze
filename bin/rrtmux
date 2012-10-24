@@ -4,7 +4,7 @@ require 'optparse'
 
 def help
   print "Usage: rrtmux [ssh options] hostname\n" \
-    "  Connects to a hostname using ssh and reattach or create a tmux session\n"
+    "  Connects over ssh, attaches or creates a tmux session, handles disconnects\n"
 end
 
 timeout = 0.125

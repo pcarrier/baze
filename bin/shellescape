@@ -5,7 +5,7 @@ require 'shellwords'
 
 optparse = OptionParser.new do |opts|
   opts.banner = "Usage: shellescape [string]\n" \
-    "  Escapes the provided string (or standard input) for unquoted Bourne shell usage"
+    "  Escapes the provided string (or standard input) for Bourne shells"
 end
 
 optparse.parse!
