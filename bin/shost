@@ -4,13 +4,17 @@ require 'socket'
 require 'optparse'
 
 reverse = false
+soft = false
 
 optparse = OptionParser.new do |opts|
-  opts.banner = "Usage: shost [-r] host\n" \
-  	"  Resolves names"
+  opts.banner = "Usage: shost [-r] host...\n" \
+    "  Resolves names"
 
   opts.on '-r', '--reverse', 'Display reverse lookups' do
     reverse = true
+  end
+  opts.on '-s', '--softfail', 'Simply display failures instead of exiting' do
+    soft = true
   end
 end
 
@@ -18,10 +22,20 @@ optparse.parse!
 
 raise 'host expected' if ARGV.empty?
 
-infos = Socket.getaddrinfo(ARGV[0], nil, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, 0, reverse)
+ARGV.each do |host|
+  begin
+    infos = Socket.getaddrinfo(host, nil, Socket::AF_UNSPEC, Socket::SOCK_STREAM, nil, 0, reverse)
 
-if reverse
-  infos.each {|r| puts r[2]}
-else
-  infos.each {|r| puts r[3]}
+    if reverse
+      infos.each {|r| puts r[2]}
+    else
+      infos.each {|r| puts r[3]}
+    end
+  rescue SocketError, e
+    if soft
+      puts "#{host} FAILED"
+    else
+      raise e
+    end
+  end
 end
