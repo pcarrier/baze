@@ -31,7 +31,7 @@ ARGV.each do |host|
     else
       infos.each {|r| puts r[3]}
     end
-  rescue SocketError, e
+  rescue SocketError => e
     if soft
       puts "#{host} FAILED"
     else
