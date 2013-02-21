@@ -15,4 +15,4 @@ end
 
 optparse.parse!
 
-printf "#{format}\n", *(6.times.map{rand(256)})
+printf "#{format}\n", 0x52, *(5.times.map{rand(256)})
