@@ -5,7 +5,7 @@ $:.unshift lib unless $:.include?(lib)
 
 Gem::Specification.new do |s|
   s.name        = 'baze'
-  s.version     = '0.0.4'
+  s.version     = '0.0.5'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Pierre Carrier']
   s.email       = ['pierre@spotify.com']
