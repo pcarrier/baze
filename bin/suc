@@ -15,15 +15,9 @@ end
 
 optparse.parse!
 
-if ARGV.empty?
-  io = STDIN
-else
-  io = File.open ARGV[0]
-end
-
 counts = Hash.new 0
 
-io.each_line do |line|
+ARGF.each_line do |line|
   counts[line] += 1
 end
 
