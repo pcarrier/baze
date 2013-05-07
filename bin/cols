@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+fs = nil
+sep = ' '
+show_only = false
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: randmac [-l]\n" \
+    "  Filter a set of columns with awk (takes a list of i|a-|-b|a-b specs)"
+
+  opts.on '-c', '--command', 'Print the awk command instead of executing' do
+    show_only = true
+  end
+
+  opts.on '-s', '--separator=', 'Change the separator' do |s|
+    sep = s
+  end
+
+    opts.on '-F', '--field-separator=', 'Specify an awk field separator' do |f|
+    fs = f
+  end
+end
+optparse.parse!
+
+def parse_spec spec
+  case spec
+  when /(\d*)-(\d*)/
+    lower = $1.empty? ? 1 : $1.to_i
+    upper = $2.empty? ? 1.0/0.0 : $2.to_i
+    lower..upper
+  else
+    spec.to_i
+  end
+end
+
+specd = ARGV.collect {|arg| parse_spec arg}
+
+grouped = specd.inject([[], nil]) do |acc, cur|
+  res, last = acc
+  if cur.class == last.class
+    res[-1] << cur
+    next [res, last]
+  else
+    res << [cur]
+    next [res, cur]
+  end
+end[0]
+
+if grouped.size == 1 and not Range === grouped[0][0]
+  # We only have integers!
+  block = %[print #{grouped[0].collect{|i|"$#{i}"}.join %[ "#{sep}" ]}]
+else
+  inner = grouped.collect do |group|
+    if Integer === group[0]
+      'printf ' + group.collect{|i| "$#{i}"}.join(%[ "#{sep}" ])
+    else
+      group.collect do |range|
+        r_start, r_end = range.begin, range.end
+        right, last = (r_end == 1.0/0.0) ? ['NF-1', 'NF'] : [r_end - 1, r_end]
+        %[for(i=#{r_start}; i <= #{right}; ++i) printf $i "#{sep}"; printf $#{last}]
+      end.join %[ "#{sep}"; ]
+    end
+  end.join %[ "#{sep}"; ]
+  block = %[#{inner}; printf "\\n"]
+end
+
+command = fs.nil? ? "awk '{#{block}}'" : "awk -F'#{fs}' '{#{block}}'"
+
+if show_only
+  puts command
+else
+  exec command
+end
