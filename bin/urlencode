@@ -3,9 +3,15 @@
 require 'optparse'
 require 'cgi'
 
+rounds = 1
+
 optparse = OptionParser.new do |opts|
-  opts.banner = "Usage: urlencode [string]\n" \
+  opts.banner = "Usage: urlencode [-n 1] [string]\n" \
     "  URL-encodes the provided string (or standard input)"
+
+  opts.on '-n', '--repeat TIMES', Integer do |n|
+    rounds = n
+  end
 end
 
 optparse.parse!
@@ -16,4 +22,6 @@ else
   str = ARGV.join ' '
 end
 
-puts CGI::escape str
+rounds.times { str = CGI::escape str }
+
+puts str
