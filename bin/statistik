@@ -4,15 +4,15 @@ s = STDIN.lines.collect {|l| l.to_f}.sort
 
 avg = s.inject{|s,e|s+e}/s.length
 
-puts "min: #{s.first}"
-puts "Q1:  #{s[s.length/4]}"
-puts "Q2:  #{s[s.length/2]}"
-puts "Q3:  #{s[3*s.length/4]}"
-puts "avg: #{avg}"
-puts "max: #{s.last}"
+puts "size: #{s.length}"
 
-puts ""
+puts "min:  #{s.first}"
+puts "Q1:   #{s[s.length/4]}"
+puts "Q2:   #{s[s.length/2]}"
+puts "Q3:   #{s[3*s.length/4]}"
+puts "avg:  #{avg}"
+puts "max:  #{s.last}"
 
 1.upto 9 do |i|
-  puts "D#{i}:  #{s[i*s.length/10]}"
+  puts "D#{i}:   #{s[i*s.length/10]}"
 end
