@@ -2,9 +2,12 @@
 
 s = STDIN.lines.collect {|l| l.to_f}.sort
 
-avg = s.inject{|s,e|s+e}/s.length
+cnt = s.length
+sum = s.inject{|s,e|s+e}
+avg = sum/cnt
 
-puts "size: #{s.length}"
+puts "size: #{cnt}"
+puts "sum:  #{sum}"
 
 puts "min:  #{s.first}"
 puts "Q1:   #{s[s.length/4]}"
