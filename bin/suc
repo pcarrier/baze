@@ -22,9 +22,9 @@ ARGF.each_line do |line|
 end
 
 if reverse
-  sorted = counts.sort_by {|k,v| -v}
+  sorted = counts.sort_by {|k,v| [-v, k]}
 else
-  sorted = counts.sort_by {|k,v| v}
+  sorted = counts.sort_by {|k,v| [v, k]}
 end
 
 sorted.each do |line, count|
