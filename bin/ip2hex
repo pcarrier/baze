@@ -21,5 +21,5 @@ raise 'IP does not have 4 integers' unless parts.length == 4
 ACCEPTED = 0..255
 parts.each {|p| raise 'Integer not in 0..255' unless ACCEPTED.include? p}
 
-num = parts.reverse.inject(0){|r,e| (r<<8)+e}
+num = parts.inject(0){|r,e| (r<<8)+e}
 printf "#{format}\n", num
