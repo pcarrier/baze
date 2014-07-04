@@ -3,7 +3,7 @@
 s = []
 sum = 0
 
-STDIN.each_line do |l|
+ARGF.each_line do |l|
   n = l.to_f
   s << n
   sum += n
