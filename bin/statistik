@@ -1,21 +1,27 @@
 #!/usr/bin/env ruby
 
-s = STDIN.lines.collect {|l| l.to_f}.sort
+s = []
+sum = 0
+
+STDIN.each_line do |l|
+  n = l.to_f
+  s << n
+  sum += n
+end
+
+s = s.sort
 
 cnt = s.length
-sum = s.inject{|s,e|s+e}
-avg = sum/cnt
 
-puts "size: #{cnt}"
-puts "sum:  #{sum}"
+print "size:  #{cnt}\n"
+print "sum:   #{sum}\n"
+print "avg:   #{sum/cnt}\n\n"
 
-puts "min:  #{s.first}"
-puts "Q1:   #{s[s.length/4]}"
-puts "Q2:   #{s[s.length/2]}"
-puts "Q3:   #{s[3*s.length/4]}"
-puts "avg:  #{avg}"
-puts "max:  #{s.last}"
-
-1.upto 9 do |i|
-  puts "D#{i}:   #{s[i*s.length/10]}"
+print "min:   #{s.first}\n"
+[10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 99].each do |p|
+  print "p#{p}:   #{s[s.length*p/100]}\n"
 end
+
+print "p999:  #{s[s.length*999/1000]}\n"
+print "p9999: #{s[s.length*9999/10000]}\n"
+print "max:   #{s.last}\n"
