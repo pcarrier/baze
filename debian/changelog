@@ -1,5 +1,5 @@
-baze (0.0.13) UNRELEASED; urgency=low
+baze (0.0.13ubuntu0) trusty; urgency=medium
 
-  * Last release
+  * Latest release.
 
- -- Pierre Carrier <pierre@spotify.com>  Thu, 29 Nov 2012 15:30:45 +0000
+ -- Pierre Carrier <pierre@gcarrier.fr>  Fri, 01 May 2015 14:11:15 -0700

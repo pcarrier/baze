@@ -1,7 +1,7 @@
 Source: baze
 Section: ruby
 Priority: optional
-Maintainer: Pierre Carrier <pierre@spotify.com>
+Maintainer: Pierre Carrier <pierre@gcarrier.fr>
 Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.2.7~)
 Standards-Version: 3.9.2
 Homepage: https://github.com/pcarrier/baze
