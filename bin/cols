@@ -8,7 +8,7 @@ show_only = false
 
 optparse = OptionParser.new do |opts|
   opts.banner = "Usage: randmac [-l]\n" \
-    "  Filter a set of columns with awk (takes a list of i|a-|-b|a-b specs)"
+    "  Filter a set of columns with awk (takes a list of i|a-|-b|a-b specs, i can be '+N' for the N-th field from the end)"
 
   opts.on '-c', '--command', 'Print the awk command instead of executing' do
     show_only = true
@@ -30,6 +30,8 @@ def parse_spec spec
     lower = $1.empty? ? 1 : $1.to_i
     upper = $2.empty? ? 1.0/0.0 : $2.to_i
     lower..upper
+  when /\+(\d+)/
+    -($1.to_i)
   else
     spec.to_i
   end
@@ -50,7 +52,7 @@ end[0]
 
 if grouped.size == 1 and not Range === grouped[0][0]
   # We only have integers!
-  block = %[print #{grouped[0].collect{|i|"$#{i}"}.join %[ "#{sep}" ]}]
+  block = %[print #{grouped[0].collect{|i|i<0?"$(NF-#{-i-1})":"$#{i}"}.join %[ "#{sep}" ]}]
 else
   inner = grouped.collect do |group|
     if Integer === group[0]
@@ -59,7 +61,7 @@ else
       group.collect do |range|
         r_start, r_end = range.begin, range.end
         right, last = (r_end == 1.0/0.0) ? ['NF-1', 'NF'] : [r_end - 1, r_end]
-        %[for(i=#{r_start}; i <= #{right}; ++i) printf $i "#{sep}"; printf $#{last}]
+        %[for(i=#{r_start};i<=#{right};++i) printf $i "#{sep}"; printf $#{last}]
       end.join %[ "#{sep}"; ]
     end
   end.join %[ "#{sep}"; ]
