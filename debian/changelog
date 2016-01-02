@@ -1,5 +1,5 @@
-baze (0.0.13ubuntu0) trusty; urgency=medium
+baze (0.1.0ubuntu0) trusty; urgency=medium
 
   * Latest release.
 
- -- Pierre Carrier <pierre@gcarrier.fr>  Fri, 01 May 2015 14:11:15 -0700
+ -- Pierre Carrier <pierre@gcarrier.fr>  Sat, 02 Jan 2016 11:33:20 -0800
