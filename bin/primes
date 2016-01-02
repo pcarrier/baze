@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+max = ARGV.shift.to_i
+unless max > 0
+  STDERR.puts 'Usage: primes x, x > 0'
+  exit 1
+end
+
+r = Array.new max
+(2..max).each do |i|
+  unless r[i]
+    p i
+    (2*i).step max, i do |j|
+      r[j] = true
+    end   
+  end
+end
