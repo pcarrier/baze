@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+require 'json'
+
+def escaped name
+  if name =~ /\.=/
+    name.inspect
+  else
+    name
+  end
+end
+
+def subpath parent, name
+  if parent
+    "#{parent}.#{escaped name}"
+  else
+    escaped name
+  end
+end
+
+def format node
+  case node
+  when nil
+    'null'
+  else
+    node.inspect
+  end
+end
+
+def traverse node, path
+  case node
+  when Hash
+    node.each_pair do |k, v|
+      traverse v, subpath(path, k)
+    end
+  when Enumerable
+    node.each_with_index do |v, i|
+      traverse v, subpath(path, i)
+    end
+  else
+    puts "#{path}=#{format node}"
+  end
+end
+
+traverse JSON::parse(ARGF.read), nil

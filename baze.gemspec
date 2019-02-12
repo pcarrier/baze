@@ -5,16 +5,15 @@ $:.unshift lib unless $:.include?(lib)
 
 Gem::Specification.new do |s|
   s.name        = 'baze'
-  s.version     = '1.0'
+  s.version     = '1.1.1'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Pierre Carrier']
-  s.email       = ['pierre@gcarrier.fr']
+  s.email       = ['pc@rrier.ca']
   s.homepage    = 'https://github.com/pcarrier/baze'
   s.summary     = 'Base utilities for POSIX system'
   s.license     = 'ISC'
 
   s.required_rubygems_version = '>= 1.2.0'
-  s.rubyforge_project         = 'baze'
 
   s.files        = Dir.glob('{bin,lib}/**/*') + %w(COPYING)
   s.executables  = Dir.entries('bin').reject {|e| e.start_with? '.'}
