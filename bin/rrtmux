@@ -8,7 +8,6 @@ def help
 end
 
 timeout = 0.125
-
 if ARGV.empty? or ARGV.find {|arg| arg == '-h' or arg == '--help'}
   help
 else

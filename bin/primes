@@ -12,6 +12,6 @@ r = Array.new max
     p i
     (2*i).step max, i do |j|
       r[j] = true
-    end   
+    end
   end
 end
