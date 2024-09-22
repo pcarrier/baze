@@ -1,3 +1,1 @@
-A set of base utilities for POSIX systems.
-
-Partly rewritten at https://github.com/pcarrier/bz
+A set of base utilities I've found missing.
