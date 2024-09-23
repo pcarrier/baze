@@ -33,7 +33,7 @@ ARGV.each do |host|
     end
   rescue SocketError => e
     if soft
-      puts "#{host} FAILED"
+      STDERR.puts "#{host} FAILED"
     else
       raise e
     end
