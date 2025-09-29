@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'time'
+
+puts Time.parse(ARGV.join(' ')).to_i * 1000
